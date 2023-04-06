@@ -1,0 +1,39 @@
+
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <a href="{% url 'dazzlesapp:allprodcat' %}" class="navbar-brand"><img src="{% static 'image/logo1.png' %}" width="60px"></a>
+    <a class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></a
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+      
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dazzlesapp:allprodcat' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown {% if 'dazzlesapp' in request.path %} active {% endif %}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Shop
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'dazzlesapp:allprodcat' %}" style="font-family: Verdana;">All Products</a>
+            {% for cat in links %}
+            <a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a>
+            {% endfor %}
+           
+        </li>
+        {% if item_count > 0 %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'my_cart:cart_detail' %}"><i class="fa-solid fa-cart-plus"> Your Cart</i>({{item_count}})</a>
+        </li>
+        {% endif %}
+      </ul>
+      <form class="d-flex" action="{% url 'dazzlesapp:searchresult' %}" method="GET">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa-solid fa-magnifying-glass"></button></i>
+      </form>
+    </div>
+  </nav>
+

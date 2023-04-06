@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+Choose product & make it yours
+{% endblock %}
+
+{% block title %}
+Cart
+{% endblock %}
+{% block content %}
+{% if not cart_items %}
+<div>
+    <div class="text-center">
+        <h1 class="text-center my_title">Your Shopping Cart is empty</h1>
+ 
+    <br>
+    <p class="text-center">Please Click<a href="{% url 'dazzlesapp:allprodcat' %}">Here</a>to Continue Shopping</p>
+</div>
+</div>
+{% else %}
+<div>
+    <div class="text-center">
+        <br>
+        <h1 class="text-center my_title">Your Shopping Cart</h1>
+        <br>
+        
+    </div>
+<div class="row mx-auto">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <table class="table custom_table">
+            <thead class="custom_head">
+                <tr>
+                    <th colspan="5">
+                        Your Items
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cart_item in cart_items %}
+                <tr>
+                    <td>
+                        <a href="cart_item.product.get_absolute_url"><img src="{{cart_item.product.image.url}}" style="width: 100px;height: 100px;" class="float-left rounded custom_image"></a>
+                    </td>
+                    <td class="text-left">
+                        {{cart_item.product.name}}
+                        <br>
+                        SKU: {{cart_item.product.id}}
+                        <br>
+                        Price: {{cart_item.product.price}}
+                        <br>
+                        Quantity: {{cart_item.quantity}} x {{cart_item}}
+                        <br>
+
+                    </td>
+                    <td>
+                        {{cart_item.sub_total}}
+                    </td>
+                    {% if cart_item.quantity < cart_item.product.stock %}
+                    <td>
+                        <a href="{% url 'my_cart:add_cart' cart_item.product.id %}"><i class="fa fa-plus custom_icon"></i> </a>&nbsp;
+                        <a href="{% url 'my_cart:remove' cart_item.product.id %}"><i class="fa fa-minus custom_icon"></i> </a>&nbsp;
+                        <a href="{% url 'my_cart:Total_remove' cart_item.product.id %}"><i class="fa-solid fa-trash custom_icon"></i> </a>
+                    </td>
+                    {% else %}
+                    <td>
+                       
+                        <a href="{% url 'my_cart:remove' cart_item.product.id %}"><i class="fa fa-minus"></i> </a>&nbsp;
+                        <a href="{% url 'my_cart:Total_remove' cart_item.product.id %}"><i class="fa-solid fa-trash"></i> </a>
+                    </td>
+                    {% endif %}
+
+                </tr>
+                {% endfor %}
+            </tbody>
+
+
+        </table>
+
+
+    </div class="mx-auto">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+        <table class="table custom_table">
+            <thead class="custom_head"> 
+                <tr>
+                    <th class="text-center">
+                        Checkout
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        please review
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+        <form method="POST" action="success">
+            <label style="font-weight: bolder; text-align: center;">You have to pay {{ total }}</label><br>
+       
+        <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="rzp_test_q7avKBVVBhaerO" 
+        data-price=""  
+        data-currency="INR" 
+        data-order_id="{{ cart_item.product.id }}" 
+        data-buttontext="Continue Shopping"
+        data-button.color="#07f743"
+        data-name="Dazzles"
+        data-description="Wherever You go dazzles yourself"
+        data-image="https://example.com/your_logo.jpg"
+        data-prefill.name="DAZZLES"
+        data-prefill.email=""
+        data-theme.color="#07f743"></script>
+        </form>
+{% endif %}
+
+{% endblock %}

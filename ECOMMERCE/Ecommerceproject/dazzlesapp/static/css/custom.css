@@ -1,0 +1,82 @@
+body{
+    font-family: 'Poppins', sans-serif;
+}
+.nav-items{
+    letter-spacing: .2em;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.dropdown-item{
+    letter-spacing: .2em;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.my_bottom{
+    margin-bottom: 15px;
+}
+.card-body h2{
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+}
+.custom_footer{
+    background-color: #f8f9fa;
+    height: 60px;
+
+}
+.custom_footer p{
+    padding-top: 20px;
+    font-size: 14px;
+
+}
+/* ###search */
+.my_search{
+    padding-top: 20px;
+}
+
+
+/* ## product page */
+.my_prod{
+    padding-top: 15px;
+    padding-bottom: 20px;
+
+}
+.my_prod .mx_auto{
+    color: black;
+    font-size: 12px;
+    text-decoration: none;
+
+}
+.my_prodtitle{
+    font-size: 16px;
+    text-transform: uppercase;
+   
+    padding-top: 10px;
+    padding-bottom: 5px;
+
+}
+.prod_des{
+    padding-right: 20px;
+}
+
+/* <cart> */
+
+.custom_table{
+    min-width: 400px;
+    font-size: 14px;
+
+}
+.custom_head{
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 2em;
+    background-color: #f8f8fa!important;
+}
+.custom_icon{
+    text-decoration: none;
+    color: #868e96!important;
+}
+.custom_btn{
+    margin-top: 5px;
+}

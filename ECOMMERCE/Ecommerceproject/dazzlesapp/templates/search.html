@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+Choose product & make it yours
+{% endblock %}
+
+{% block title %}
+search
+{% endblock %}
+{% block content %}
+<div>
+    <p class="text-center my_search">You have Search for :<b>"{{query}}"</b></p>
+</div>
+<div class="container">
+    <div class="row mx-auto">
+        {% for i in product %}
+        <div class="my_bottom col-9 col-sm-12 col-md-4 col-lg-4">
+            <div class="card text-center" style="min-width:18rem">
+                <a href="{{i.get_url}}"><img class="card-img-top my_image" src="{{i.image.url}}" alt="{{i.name}}"
+                        width="300px" height="200px"> </a>
+                <div class="card-body">
+                    <h2>{{i.name}}</h2>
+                    <h2>{{i.price}}</h2>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% for i in product %}
+{% empty %}
+<div class="row mx-auto">
+    <p class="text-center my_search">No results found!!</p>
+</div>
+{% endfor %}
+
+{% endblock %}
